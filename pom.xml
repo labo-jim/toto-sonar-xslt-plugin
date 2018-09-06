@@ -7,6 +7,10 @@
    <!-- this is important for sonar-packaging-maven-plugin -->
   <packaging>sonar-plugin</packaging>
   
+  <name>Toto XSLT Sonar Plugin</name>
+  <description>Les bonnes pratiques XSLT de toto</description>
+  
+  
   <properties>
   	<sonar.apiVersion>6.7.1</sonar.apiVersion>
   </properties>
@@ -27,7 +31,7 @@
       <plugin>
         <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
         <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <version>1.17</version>
+        <version>1.18.0.372</version>
         <extensions>true</extensions>
         <configuration>
           <!-- the entry-point class that extends org.sonar.api.SonarPlugin -->
