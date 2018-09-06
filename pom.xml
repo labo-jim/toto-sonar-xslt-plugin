@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>labo.jim</groupId>
+  <artifactId>sonar-toto-xsl-plugin</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+   <!-- this is important for sonar-packaging-maven-plugin -->
+  <packaging>sonar-plugin</packaging>
+  
+  <properties>
+  	<sonar.apiVersion>6.7.1</sonar.apiVersion>
+  </properties>
+ 
+  <dependencies>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <!-- minimal version of SonarQube to support. Note that the groupId was "org.codehaus.sonar" before version 5.2 -->
+      <version>${sonar.apiVersion}</version>
+      <!-- mandatory scope -->
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+ 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.17</version>
+        <extensions>true</extensions>
+        <configuration>
+          <!-- the entry-point class that extends org.sonar.api.SonarPlugin -->
+          <pluginClass>labo.jim.sonar.xsl.TotoXslPlugin</pluginClass>
+           
+          <!-- advanced properties can be set here. See paragraph "Advanced Build Properties". -->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
