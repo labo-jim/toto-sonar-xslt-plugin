@@ -6,13 +6,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import net.sf.saxon.s9api.DocumentBuilder;
-import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.XPathCompiler;
-import net.sf.saxon.s9api.XPathExecutable;
-import net.sf.saxon.s9api.XPathSelector;
-
 import org.junit.Test;
 
 import labo.jim.sonar.xsl.helpers.XpathTester;
