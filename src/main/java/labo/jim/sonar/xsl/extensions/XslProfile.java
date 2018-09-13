@@ -14,7 +14,7 @@ public class XslProfile implements BuiltInQualityProfilesDefinition{
 	    NewBuiltInActiveRule rule1 = profile.activateRule(XslRules.REPOSITORY, XslRules.SHOULD_HAVE_COMMENTS.rule());
 	    // rule1.overrideSeverity("BLOCKER");
 
-		
+		profile.done();
 	}
 
 }
