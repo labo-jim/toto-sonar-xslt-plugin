@@ -17,25 +17,30 @@ public class XpathTester {
 	
 	private DocumentBuilder docBuilder;
 	private XPathCompiler xpathCompilo;
+	private XPathExecutable exec;
 
 
-	public XpathTester() {
+	public XpathTester(String xpath) {
 		Processor proc = new Processor(false);
 		this.docBuilder = proc.newDocumentBuilder();
 		this.xpathCompilo = proc.newXPathCompiler();
+		try {
+			this.exec = xpathCompilo.compile(xpath);
+		} catch (SaxonApiException e) {
+			throw new UnsupportedOperationException(e);
+		}
 	}
 	
 	
-	public boolean doTestXPath(File xml,String xpath) throws SaxonApiException {	
-		return executeXpathTest(docBuilder.build(xml), xpath);
+	public boolean doTestXPath(File xml) throws SaxonApiException {	
+		return executeXpathTest(docBuilder.build(xml));
 	}
 	
-	public boolean doTestXPath(InputStream xml,String xpath) throws SaxonApiException {	
-		return executeXpathTest(docBuilder.build(new StreamSource(xml)), xpath);
+	public boolean doTestXPath(InputStream xml) throws SaxonApiException {	
+		return executeXpathTest(docBuilder.build(new StreamSource(xml)));
 	}
 	
-	private boolean executeXpathTest(XdmItem xml,String xpath) throws SaxonApiException {
-		XPathExecutable exec = xpathCompilo.compile(xpath);
+	private boolean executeXpathTest(XdmItem xml) throws SaxonApiException {
 		XPathSelector sel = exec.load();
 		sel.setContextItem(xml);
 		return sel.effectiveBooleanValue();

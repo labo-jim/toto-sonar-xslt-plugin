@@ -69,8 +69,8 @@ public class XslCommentSensor implements Sensor{
 	}
 
 	private boolean testComments(InputFile inputFile) throws SaxonApiException, IOException {
-		XpathTester xpathTester = new XpathTester();
-		return xpathTester.doTestXPath(inputFile.inputStream(), EXISTS_COMMENT);
+		XpathTester xpathTester = new XpathTester(EXISTS_COMMENT);
+		return xpathTester.doTestXPath(inputFile.inputStream());
 	}
 
 }

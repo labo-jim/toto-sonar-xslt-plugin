@@ -21,8 +21,8 @@ public class TestXpathExist {
 		URL avec = TestXpathExist.class.getClassLoader().getResource("toto-avec.xml");
 		try {
 			
-			XpathTester xpathTeser = new XpathTester();
-			assertTrue(xpathTeser.doTestXPath(new File(avec.toURI()), EXISTS_AS_ATTR));
+			XpathTester xpathTeser = new XpathTester(EXISTS_AS_ATTR);
+			assertTrue(xpathTeser.doTestXPath(new File(avec.toURI())));
 			
 		} catch (URISyntaxException | SaxonApiException e) {
 			throw new RuntimeException(e);
@@ -35,8 +35,8 @@ public class TestXpathExist {
 		URL sans = TestXpathExist.class.getClassLoader().getResource("toto-sans.xml");
 		try {
 			
-			XpathTester xpathTeser = new XpathTester();
-			assertFalse(xpathTeser.doTestXPath(new File(sans.toURI()), EXISTS_AS_ATTR));
+			XpathTester xpathTeser = new XpathTester(EXISTS_AS_ATTR);
+			assertFalse(xpathTeser.doTestXPath(new File(sans.toURI())));
 			
 		} catch (URISyntaxException | SaxonApiException e) {
 			throw new RuntimeException(e);
