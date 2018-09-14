@@ -8,6 +8,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import labo.jim.sonar.xsl.helpers.XpathTester;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -15,6 +17,9 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class XslCommentSensor implements Sensor{
 	
 	private static final String EXISTS_COMMENT = "exists(//comment())";
+	
+	private static final Logger LOG = Loggers.get(XslCommentSensor.class);
+	private static final String PREFIX = "[XSL SENSOR]\t";
 
 	@Override
 	public void describe(SensorDescriptor descriptor) {
@@ -30,16 +35,24 @@ public class XslCommentSensor implements Sensor{
 
 	@Override
 	public void execute(SensorContext context) {
+		LOG.info(PREFIX+"Begin execute method");
+		
 		FileSystem fs = context.fileSystem();
 	    Iterable<InputFile> xslFiles = fs.inputFiles(fs.predicates().hasLanguage(XslLanguage.KEY));
 	    for (InputFile inputFile : xslFiles) {
 			try {
+				LOG.info("Traitement de "+inputFile.filename());
+				
 				boolean hasComments = testComments(inputFile);
 				
-				if(!hasComments) createCommentIssue(context,inputFile);
+				if(!hasComments) {
+					LOG.info(PREFIX+inputFile.filename()+"Has no comments => ISSUE !");
+					createCommentIssue(context,inputFile);
+				} else {
+					LOG.info(PREFIX+inputFile.filename()+"Has comments => OK.");
+				}
 			} catch (SaxonApiException | IOException e) {
-				// TODO QUE FAIRE ??
-				throw new RuntimeException(e);
+				LOG.error("Erreur dans le traitement de "+inputFile.filename(), e);
 			}
 		}
 		

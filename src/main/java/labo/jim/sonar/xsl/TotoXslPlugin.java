@@ -1,6 +1,7 @@
 package labo.jim.sonar.xsl;
 
 import org.sonar.api.Plugin;
+import org.sonar.api.utils.log.Loggers;
 
 import labo.jim.sonar.xsl.extensions.XslCommentSensor;
 import labo.jim.sonar.xsl.extensions.XslLanguage;
@@ -10,6 +11,8 @@ import labo.jim.sonar.xsl.extensions.XslRules;
 public class TotoXslPlugin implements Plugin{
 
 	public void define(Context context) {
+		Loggers.get(TotoXslPlugin.class).info("Helloooo ! INIT TOTO'S XSL SONAR PLUGIN !");
+		
 		// TODO Auto-generated method stub
 		
 		// Dans un premier temps :
