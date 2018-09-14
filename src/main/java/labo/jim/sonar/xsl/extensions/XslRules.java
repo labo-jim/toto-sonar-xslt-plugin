@@ -7,12 +7,14 @@ import org.sonar.api.server.rule.RulesDefinition;
 public class XslRules implements RulesDefinition {
 	
 	public static final String REPOSITORY = "xlst-toto";
+	
 	public static final RuleKey SHOULD_HAVE_COMMENTS = RuleKey.of(REPOSITORY, "comments");
+	public static final RuleKey VARIABLES_MUST_BE_TYPED = RuleKey.of(REPOSITORY, "typed-variables");
 
 	public void define(Context context) {
 		NewRepository repository = context.createRepository(REPOSITORY, XslLanguage.KEY).setName("Repository Bonnes pratiques de Toto");
 
-	    NewRule x1Rule = repository.createRule(SHOULD_HAVE_COMMENTS.rule())
+	    NewRule commentRule = repository.createRule(SHOULD_HAVE_COMMENTS.rule())
 	      .setName("XSLT Comments")
 	      .setMarkdownDescription("An XSLT file *should* have at least one comment inside it")
 
@@ -21,8 +23,13 @@ public class XslRules implements RulesDefinition {
 
 	      // default severity when the rule is activated on a Quality profile. Default value is MAJOR.
 	      .setSeverity(Severity.MINOR);
+	    
+	   repository.createRule(SHOULD_HAVE_COMMENTS.rule())
+	  	      .setName("Variables should be typed")
+	  	      .setMarkdownDescription("I's important for code reliability that variable has an @as attribute.")
+	  	      .setSeverity(Severity.MAJOR);
 
-	    x1Rule.setDebtRemediationFunction(x1Rule.debtRemediationFunctions().linearWithOffset("1h", "30min"));
+	    commentRule.setDebtRemediationFunction(commentRule.debtRemediationFunctions().linearWithOffset("1h", "30min"));
 
 	    // don't forget to call done() to finalize the definition
 	    repository.done();

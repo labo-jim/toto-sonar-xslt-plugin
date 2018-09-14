@@ -13,6 +13,8 @@ public class XslLanguage extends AbstractLanguage{
 	public static final String NAME = "XSLT";
 	public static final String KEY = "xslt";
 	
+	public static final String XSL_NS = "http://www.w3.org/1999/XSL/Transform";
+	
 	public static final String FILE_SUFFIXES_KEY = "sonar.foo.file.suffixes";
 	public static final String FILE_SUFFIXES_DEFAULT_VALUE = ".xsl";
 	
