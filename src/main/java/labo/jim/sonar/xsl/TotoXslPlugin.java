@@ -3,6 +3,7 @@ package labo.jim.sonar.xsl;
 import org.sonar.api.Plugin;
 import org.sonar.api.utils.log.Loggers;
 
+import labo.jim.sonar.xsl.extensions.XslAsAttributeSensor;
 import labo.jim.sonar.xsl.extensions.XslCommentSensor;
 import labo.jim.sonar.xsl.extensions.XslLanguage;
 import labo.jim.sonar.xsl.extensions.XslProfile;
@@ -30,6 +31,7 @@ public class TotoXslPlugin implements Plugin{
 		// * Création d'un sensor (faire simple et stupide pour le moment
 		// * Créer des issues lorsque nécessaire.
 		context.addExtension(XslCommentSensor.class);
+		context.addExtension(XslAsAttributeSensor.class);
 		
 		// (...) *à affiner/compléter au besoin*
 		
