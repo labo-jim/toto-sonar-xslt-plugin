@@ -14,14 +14,24 @@ import org.sonar.api.batch.fs.TextRange;
 
 public class FakeSonarInputFile implements InputFile{
 	
-	private static final String TOTO = "toto-avec.xml";
+	private static final String DEFAULT = "toto-avec.xml";
+	
+	private String srcFilename;
+	
+	public FakeSonarInputFile() {
+		this.srcFilename = DEFAULT;
+	}
+	
+	public FakeSonarInputFile(String srcFilename) {
+		this.srcFilename = srcFilename;
+	}
 	
 	
 	
 	@Override
 	public URI uri() {
 		try {
-			return FakeSonarInputFile.class.getClassLoader().getResource(TOTO).toURI();
+			return FakeSonarInputFile.class.getClassLoader().getResource(this.srcFilename).toURI();
 		} catch (URISyntaxException e) {
 			throw new UnsupportedOperationException(e);
 		}
@@ -29,7 +39,7 @@ public class FakeSonarInputFile implements InputFile{
 
 	@Override
 	public String filename() {
-		return TOTO;
+		return this.srcFilename;
 	}
 
 	@Override
@@ -74,7 +84,7 @@ public class FakeSonarInputFile implements InputFile{
 
 	@Override
 	public InputStream inputStream() throws IOException {
-		return FakeSonarInputFile.class.getClassLoader().getResourceAsStream(TOTO);
+		return FakeSonarInputFile.class.getClassLoader().getResourceAsStream(this.srcFilename);
 	}
 
 	@Override

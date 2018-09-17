@@ -21,7 +21,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 
 public class XslAsAttributeSensor implements Sensor{
 	
-	private static final String UNTYPED_VARIABLE = "//Q{" + XslLanguage.XSL_NS + "}variable[not(exists(@as))]";
+	public static final String UNTYPED_VARIABLE = "//Q{" + XslLanguage.XSL_NS + "}variable[not(exists(@as))]";
 	
 	private static final Logger LOG = Loggers.get(XslAsAttributeSensor.class);
 	
@@ -46,11 +46,13 @@ public class XslAsAttributeSensor implements Sensor{
 
 	@Override
 	public void execute(SensorContext context) {
-				
+		LOG.info("HEY ! executing AsAttribute sensor");
+		
 		FileSystem fs = context.fileSystem();
 	    Iterable<InputFile> xslFiles = fs.inputFiles(fs.predicates().hasLanguage(XslLanguage.KEY));
 	    for (InputFile inputFile : xslFiles) {
-			
+	    	LOG.info("HEY ! AsAttribute sensor works on " + inputFile.filename());
+	    	
 	    	createIssueForOccurences(context, inputFile);
 		}
 		
@@ -60,6 +62,7 @@ public class XslAsAttributeSensor implements Sensor{
 	private void createIssueForOccurences(SensorContext context, InputFile inputFile) {
 		try {
 			List<XpathOccurence> occurences = this.locator.occurences(inputFile);
+			LOG.info("HEY ! here the occrurences (Untypede variables)" + occurences);
 			
 			for (XpathOccurence xpathOccurence : occurences) {
 				NewIssue newIssue = context.newIssue();
