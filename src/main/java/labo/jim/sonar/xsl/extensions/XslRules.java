@@ -24,7 +24,7 @@ public class XslRules implements RulesDefinition {
 	      // default severity when the rule is activated on a Quality profile. Default value is MAJOR.
 	      .setSeverity(Severity.MINOR);
 	    
-	   repository.createRule(SHOULD_HAVE_COMMENTS.rule())
+	   repository.createRule(VARIABLES_MUST_BE_TYPED.rule())
 	  	      .setName("Variables should be typed")
 	  	      .setMarkdownDescription("I's important for code reliability that variable has an @as attribute.")
 	  	      .setSeverity(Severity.MAJOR);
